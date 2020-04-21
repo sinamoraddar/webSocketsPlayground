@@ -1,0 +1,10 @@
+{
+  "name": "socket.io-Tutorial",
+  "description": "my first app with react.js and socket.io",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^2.3.0"
+  }
+}
