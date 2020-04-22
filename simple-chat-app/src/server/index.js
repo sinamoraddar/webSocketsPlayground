@@ -1,20 +1,17 @@
 var app = require("express")();
 var http = require("http").createServer(app);
-var io = require("socket.io")(http);
+var io = (module.exports.io = require("socket.io")(http));
+
+const SocketManger = require("./SocketManager");
+
+const PORT = process.env.PORT || 4000;
+
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-io.on("connection", (socket) => {
-  console.log("a user connected");
-  socket.on("disconnect", () => {
-    console.log("a user disconnected");
-  });
-  socket.on("chat message", (message) => {
-    io.emit("chat message", message);
-  });
-});
+io.on("connection", SocketManger);
 
-http.listen(3000, () => {
-  console.log("listening on *:3000");
+http.listen(PORT, () => {
+  console.log("listening on *:" + PORT);
 });
